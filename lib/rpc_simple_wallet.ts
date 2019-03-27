@@ -33,9 +33,7 @@ export class RPCSimpleWallet extends JsonRPC {
 
     super(coin);
 
-    this.coin = coin;
-
-    this.fee = 0.0001;
+    this.coin = coin;;
 
     if (address) {
 

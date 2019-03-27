@@ -1,3 +1,4 @@
+
 require("dotenv").config();
 
 import * as http from 'superagent';
@@ -10,6 +11,7 @@ export class JsonRPC {
     port: string;
     user: string;
     password: string;
+    fee: number;
 
     constructor(coin: string) {
       
@@ -17,7 +19,7 @@ export class JsonRPC {
       this.port = coins[coin].port 
       this.user = coins[coin].user 
       this.password = coins[coin].password 
-
+      this.fee = coins[coin].fee
     }
     
     async call(method: string, params=[]) {
