@@ -1,0 +1,19 @@
+{
+  "name": "rpc-simple-wallet",
+  "version": "1.0.2",
+  "description": "RPC-Based Crypto Wallet for Single Address",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc"
+  },
+  "author": "Steven Zeiler",
+  "homepage": "https://github.com/anypay/rpc-simple-wallet",
+  "license": "ISC",
+  "dependencies": {
+    "@types/node": "^11.12.0",
+    "bignumber.js": "^8.1.1",
+    "commander": "^2.19.0",
+    "dotenv": "^7.0.0",
+    "superagent": "^4.1.0"
+  }
+}
