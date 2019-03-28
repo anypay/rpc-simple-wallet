@@ -9,13 +9,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const rpc_simple_wallet_1 = require("../../rpc-simple-wallet");
+const _1 = require("../");
 const program = require("commander");
 const WALLET = 'Xxie51C2VsBC1bLUuWaCXKdJwEwtNzZPfU';
 program
     .command('getbalance <account>')
     .action((account) => __awaiter(this, void 0, void 0, function* () {
-    let wallet = new rpc_simple_wallet_1.RPCSimpleWallet('DASH', account || WALLET);
+    let wallet = new _1.RPCSimpleWallet('BCH', account || WALLET);
     let balance = yield wallet.getAddressUnspentBalance();
     console.log('balance', balance);
     process.exit(0);
@@ -23,7 +23,7 @@ program
 program
     .command('sendtoaddress <account> <destination> <amount>')
     .action((account, destination, amount) => __awaiter(this, void 0, void 0, function* () {
-    let wallet = new rpc_simple_wallet_1.RPCSimpleWallet('DASH', account);
+    let wallet = new _1.RPCSimpleWallet('BCH', account);
     let balance = yield wallet.getAddressUnspentBalance();
     let payment = yield wallet.sendToAddress(destination, parseFloat(amount));
     console.log('payment', payment);
