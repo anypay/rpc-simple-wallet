@@ -64,5 +64,23 @@ coins['RVN'] = {
     "fee": .1,
 }
 
+coins['BTC'] = {
+
+    "host": process.env.BTC_RPC_HOST,
+    "port": process.env.BTC_RPC_PORT,
+    "user": process.env.BTC_RPC_USER,
+    "password": process.env.BTC_RPC_PASSWORD,
+    "fee": .0001,
+}
+
+coins['ZEC'] = {
+
+    "host": process.env.ZEC_RPC_HOST,
+    "port": process.env.ZEC_RPC_PORT,
+    "user": process.env.ZEC_RPC_USER,
+    "password": process.env.ZEC_RPC_PASSWORD,
+    "fee": .001,
+}
+
 export { coins }; 
 
