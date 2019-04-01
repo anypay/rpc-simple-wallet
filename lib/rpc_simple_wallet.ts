@@ -87,13 +87,17 @@ export class RPCSimpleWallet extends JsonRPC {
 
     var sumInputs = new BigNumber(0); 
 
+    var fee = new BigNumber(this.fee);
+
     for (let i=0; i < this.utxos.length; i++) {
 
       inputs.push(this.utxos[i])
 
       sumInputs = sumInputs.plus(new BigNumber(this.utxos[i].amount));
 
-      if (sumInputs.isGreaterThanOrEqualTo(amount)) {
+      let a = new BigNumber(amount);
+
+      if (sumInputs.isGreaterThanOrEqualTo(a.plus(fee))) {
         break;
       }
       
@@ -105,12 +109,18 @@ export class RPCSimpleWallet extends JsonRPC {
 
     outputs[address] = amount.toFixed(8);
 
-    // change
-    outputs[this.address] = sumInputs
+    let changeAmount = sumInputs
       .minus(outputAmount)
       .minus(this.fee)
-      .toNumber()
-      .toFixed(8);
+      .toNumber();
+
+    if (changeAmount > 0) {
+
+      outputs[this.address] = changeAmount;
+
+    }
+
+    console.log('OUTPUTS', outputs);
 
     let params = [
       inputs.map(i => {

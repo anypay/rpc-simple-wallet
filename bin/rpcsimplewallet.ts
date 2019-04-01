@@ -1,6 +1,6 @@
 #!/usr/bin/env ts-node
 
-import { RPCSimpleWallet } from '../../rpc-simple-wallet';
+import { RPCSimpleWallet } from '../';
 
 import { BigNumber } from 'bignumber.js'
 
@@ -12,7 +12,7 @@ program
   .command('getbalance <account>')
   .action(async (account) => {
 
-    let wallet = new RPCSimpleWallet('DASH', account || WALLET);
+    let wallet = new RPCSimpleWallet('BCH', account || WALLET);
 
     let balance = await wallet.getAddressUnspentBalance();
 
@@ -25,7 +25,7 @@ program
   .command('sendtoaddress <account> <destination> <amount>')
   .action(async (account, destination, amount) => {
 
-    let wallet = new RPCSimpleWallet('DASH', account);
+    let wallet = new RPCSimpleWallet('BCH', account);
 
     let balance = await wallet.getAddressUnspentBalance();
 

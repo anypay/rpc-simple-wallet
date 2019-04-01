@@ -17,6 +17,7 @@ class JsonRPC {
         this.port = coins_1.coins[coin].port;
         this.user = coins_1.coins[coin].user;
         this.password = coins_1.coins[coin].password;
+        this.fee = coins_1.coins[coin].fee;
     }
     call(method, params = []) {
         return __awaiter(this, void 0, void 0, function* () {
