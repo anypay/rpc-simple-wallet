@@ -82,5 +82,15 @@ coins['ZEC'] = {
     "fee": .001,
 }
 
+coins['BSV'] = {
+
+    "host": process.env.BSV_RPC_HOST,
+    "port": process.env.BSV_RPC_PORT,
+    "user": process.env.BSV_RPC_USER,
+    "password": process.env.BSV_RPC_PASSWORD,
+    "fee": .0001
+}
+
+
 export { coins }; 
 
