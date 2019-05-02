@@ -107,7 +107,7 @@ export class RPCSimpleWallet extends JsonRPC {
 
     let outputAmount = new BigNumber(amount);
 
-    outputs[address] = amount.toFixed(8);
+    outputs[address] = parseFloat(amount.toFixed(8));
 
     let changeAmount = sumInputs
       .minus(outputAmount)
