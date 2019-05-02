@@ -116,7 +116,8 @@ export class RPCSimpleWallet extends JsonRPC {
 
     if (changeAmount > 0) {
 
-      outputs[this.address] = changeAmount;
+      // must be eight decimals max to be valid
+      outputs[this.address] = parseFloat(changeAmount.toFixed(8));
 
     }
 
