@@ -23,30 +23,38 @@ export class JsonRPC {
     }
     
     async call(method: string, params=[]) {
+
+      var resp;
  
       if(this.port){
 
-        let resp = await http
-      			.post(`http://${this.host}:${this.port}`)
+        resp = await http
+          .post(`http://${this.host}:${this.port}`)
     			.auth(this.user, this.password)
     			.send({
       				method,
       				params
     			});
-
-  	return resp.body.result;
 
       }else{
 
-        let resp = await http
-      			.post(`https://${this.host}`)
+        resp = await http
+          .post(`https://${this.host}`)
     			.auth(this.user, this.password)
     			.send({
       				method,
       				params
     			});
 
-  	return resp.body.result;
+      }
+
+      if (resp.body) {
+
+        return resp.body.result;
+
+      } else {
+
+        throw new Error(resp);
 
       }
       
