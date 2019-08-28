@@ -21,25 +21,30 @@ class JsonRPC {
     }
     call(method, params = []) {
         return __awaiter(this, void 0, void 0, function* () {
+            var resp;
             if (this.port) {
-                let resp = yield http
+                resp = yield http
                     .post(`http://${this.host}:${this.port}`)
                     .auth(this.user, this.password)
                     .send({
                     method,
                     params
                 });
-                return resp.body.result;
             }
             else {
-                let resp = yield http
+                resp = yield http
                     .post(`https://${this.host}`)
                     .auth(this.user, this.password)
                     .send({
                     method,
                     params
                 });
+            }
+            if (resp.body) {
                 return resp.body.result;
+            }
+            else {
+                throw new Error(resp);
             }
         });
     }
