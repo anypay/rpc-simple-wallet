@@ -11,6 +11,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 require('dotenv').config();
 const jsonrpc_1 = require("./jsonrpc");
 const bignumber_js_1 = require("bignumber.js");
+const bitcoinCom = require("./bitcoin_com");
 class RPCSimpleWallet extends jsonrpc_1.JsonRPC {
     constructor(coin, address) {
         super(coin);
@@ -20,9 +21,18 @@ class RPCSimpleWallet extends jsonrpc_1.JsonRPC {
             this.address = address;
         }
     }
+    getUtxos() {
+        return __awaiter(this, void 0, void 0, function* () {
+            if (this.coin === 'BCH') {
+                return bitcoinCom.getUtxos(this.address);
+            }
+            let utxos = yield this.call('listunspent', [0, 9999999, [this.address]]);
+            return utxos;
+        });
+    }
     updateWallet() {
         return __awaiter(this, void 0, void 0, function* () {
-            let utxos = yield this.call('listunspent', [0, 9999999, [this.address]]);
+            let utxos = yield this.getUtxos();
             this.utxos = utxos.sort((a, b) => a.amount > b.amount);
             this.balance = yield this.getAddressUnspentBalance();
         });

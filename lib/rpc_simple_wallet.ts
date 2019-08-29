@@ -4,6 +4,8 @@ import { JsonRPC } from './jsonrpc';
 
 import { BigNumber } from 'bignumber.js';
 
+import * as bitcoinCom from './bitcoin_com';
+
 interface UTxO {
   txid: string;
   vout: number;
@@ -43,10 +45,23 @@ export class RPCSimpleWallet extends JsonRPC {
 
   }
 
-  async updateWallet() {
+  async getUtxos() {
+
+    if (this.coin === 'BCH') {
+
+      return bitcoinCom.getUtxos(this.address);
+
+    }
 
     let utxos = await this.call('listunspent',
         [0, 9999999, [this.address]]);
+
+    return utxos;
+  }
+
+  async updateWallet() {
+
+    let utxos = await this.getUtxos();
 
     this.utxos = utxos.sort((a,b) => a.amount > b.amount);
 
